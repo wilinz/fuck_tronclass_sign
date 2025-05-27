@@ -1,4 +1,4 @@
-# fuck_guet_changke_sign 桂电畅课系统签到url解析
+# fuck_tronclass_sign 畅课系统签到url解析
 
 源 js：
 ```js
