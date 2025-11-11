@@ -248,7 +248,7 @@ class _UrlAnalysis {
   static final String oa = na + "0";
 
   // 假设 base_url 是全局变量
-  static final String baseUrl = 'https://courses.example.edu.com';
+  static final String baseUrl = 'https://courses.guet.edu.com';
 
   // 辅助函数：将整数转换为 base36 字符串
   static String toBase36(int num) {
@@ -269,43 +269,35 @@ class _UrlAnalysis {
   }
 
   // 定义 aa 对象：key 为各字段名，value 为 index 转换成 base36 后的字符串
-  static final Map<String, String> aa = {
-    for (int i = 0;
-        i <
-            [
-              "courseId",
-              "activityId",
-              "activityType",
-              "data",
-              "rollcallId",
-              "groupSetId",
-              "accessCode",
-              "action",
-              "enableGroupRollcall",
-              "createUser",
-              "joinCourse"
-            ].length;
-        i++)
-      [
-        "courseId",
-        "activityId",
-        "activityType",
-        "data",
-        "rollcallId",
-        "groupSetId",
-        "accessCode",
-        "action",
-        "enableGroupRollcall",
-        "createUser",
-        "joinCourse"
-      ][i]: toBase36(i)
-  };
+  static const List<String> _aaKeys = [
+    "courseId",
+    "activityId",
+    "activityType",
+    "data",
+    "rollcallId",
+    "groupSetId",
+    "accessCode",
+    "action",
+    "enableGroupRollcall",
+    "createUser",
+    "joinCourse",
+  ];
+
+  // 2) 用下标生成 aa，并设为只读
+  static final Map<String, String> aa = Map.unmodifiable({
+    for (final e in _aaKeys.asMap().entries) e.value: toBase36(e.key),
+  });
 
   // 定义 ua 对象：key 为各字段名，value 为 na 加上 (index+2) 转换成 base36 的字符串
-  static final Map<String, String> ua = {
-    for (int i = 0; i < ["classroom-exam", "feedback", "vote"].length; i++)
-      ["classroom-exam", "feedback", "vote"][i]: na + toBase36(i + 2)
-  };
+  static const List<String> _uaKeys = [
+    "classroom-exam",
+    "feedback",
+    "vote",
+  ];
+
+  static final Map<String, String> ua = Map.unmodifiable({
+    for (final e in _uaKeys.asMap().entries) e.value: na + toBase36(e.key + 2),
+  });
 
   // ca 为 aa 的键值对反转后的 Map
   static final Map<String, String> ca = {
